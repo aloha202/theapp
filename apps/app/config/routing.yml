@@ -2,9 +2,9 @@
 # http://www.symfony-project.org/reference/1_4/en/10-Routing
 
 # default rules
-homepage:
-  url:   /
-  param: { module: default, action: index }
+load:
+  url:   /load
+  param: { module: index, action: load }
 
 # generic rules
 # please, remove them by adding more specific rules
