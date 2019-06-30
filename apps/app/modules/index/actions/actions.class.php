@@ -19,4 +19,10 @@ class indexActions extends sfActions
   {
     $this->forward('default', 'module');
   }
+
+
+  public function executeLoad(sfWebRequest $request){
+      $this->getResponse()->setContentType('text/javascript');
+      return $this->renderPartial('index/load.js');
+  }
 }
