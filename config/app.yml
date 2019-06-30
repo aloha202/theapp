@@ -7,55 +7,6 @@ all:
     attribute_required: false
     siteurl: http://dev
   live_server: ' '
-  testaurus:
-    callback: util/imageBuilderWidget
-    image_folder: testaurus
-    image_ext: jpg
-    image_field: image
-    pdf_folder: pdf
-    pdf_field: pdf
-    thumbs:
-      small:
-        width: 160
-        height: 120
-        method: crop
-        ext: .small
-      tiny:
-        width: 127
-        height: 106
-        method: crop
-        ext: .tiny
-  blog_post:
-    callback: util/imageBuilderWidget
-    image_folder: news
-    image_ext: jpg
-    image_field: image
-    pdf_folder: pdf
-    pdf_field: pdf
-    thumbs:
-      small:
-        width: 150
-        height: 150
-        method: crop
-        ext: .small
-  user_config_settings:
-    callback: util/imageBuilderWidget
-    image_folder: user_config_settings
-    image_ext: jpg
-    image_field: image
-    pdf_folder: pdf
-    pdf_field: pdf
-    thumbs:
-      tiny:
-        width: 50
-        height: 50
-        method: crop
-        ext: .tiny
-      small:
-        width: 120
-        height: 170
-        method: crop
-        ext: .small
   default_image:
     callback: util/imageBuilderWidget
     image_folder: default_image
