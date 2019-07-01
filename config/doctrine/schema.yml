@@ -1,3 +1,27 @@
+Website:
+  connection: doctrine
+  columns:
+    namespace: string(255)
+    url: string(255)
+    is_secure: {type: boolean, default: true}
+
+WebsiteProject:
+  actAs: [Timestampable]
+  columns:
+    website_id: {type: integer, notnull: true}
+    name: string(255)
+  relations:
+    Website: {foreignAlias: Projects, onDelete: CASCADE}
+    Users: {class: sfGuardUser, refClass: WebsiteProject2sfGuardUser, foreignAlias: Projects}
+
+WebsiteProject2sfGuardUser:
+  columns:
+    website_project_id: {type: integer, primary: true, notnull: true}
+    sf_guard_user_id: {type: integer, primary: true, notnull: true}
+  relations:
+    WebsiteProject: {onDelete: CASCADE}
+    sfGuardUser: {onDelete: CASCADE}
+
 DefaultImage:
   connection: doctrine  
   actAs: [ImageBuilder]
