@@ -119,6 +119,7 @@ abstract class BasesfGuardUserForm extends BaseFormDoctrine
         
       'groups_list'      => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardGroup')),
       'permissions_list' => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardPermission')),
+      'projects_list'    => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'WebsiteProject')),
     ));
 
     $this->setValidators(array(
@@ -152,6 +153,7 @@ abstract class BasesfGuardUserForm extends BaseFormDoctrine
               'updated_at'       => new sfValidatorDateTime(),
             'groups_list'      => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardGroup', 'required' => false)),
       'permissions_list' => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardPermission', 'required' => false)),
+      'projects_list'    => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'WebsiteProject', 'required' => false)),
     ));
 
     $this->validatorSchema->setPostValidator(
@@ -205,6 +207,11 @@ abstract class BasesfGuardUserForm extends BaseFormDoctrine
     if (isset($this->widgetSchema['permissions_list']))
     {
       $this->setDefault('permissions_list', $this->object->Permissions->getPrimaryKeys());
+    }
+
+    if (isset($this->widgetSchema['projects_list']))
+    {
+      $this->setDefault('projects_list', $this->object->Projects->getPrimaryKeys());
     }
 
   }
@@ -285,6 +292,44 @@ abstract class BasesfGuardUserForm extends BaseFormDoctrine
     }
   }
 
+  public function saveProjectsList($con = null)
+  {
+    if (!$this->isValid())
+    {
+      throw $this->getErrorSchema();
+    }
+
+    if (!isset($this->widgetSchema['projects_list']))
+    {
+      // somebody has unset this widget
+      return;
+    }
+
+    if (null === $con)
+    {
+      $con = $this->getConnection();
+    }
+
+    $existing = $this->object->Projects->getPrimaryKeys();
+    $values = $this->getValue('projects_list');
+    if (!is_array($values))
+    {
+      $values = array();
+    }
+
+    $unlink = array_diff($existing, $values);
+    if (count($unlink))
+    {
+      $this->object->unlink('Projects', array_values($unlink));
+    }
+
+    $link = array_diff($values, $existing);
+    if (count($link))
+    {
+      $this->object->link('Projects', array_values($link));
+    }
+  }
+
   
   
 
@@ -293,6 +338,7 @@ abstract class BasesfGuardUserForm extends BaseFormDoctrine
     
     $this->saveGroupsList($con);
     $this->savePermissionsList($con);
+    $this->saveProjectsList($con);
         
     
     parent::doSave($con);
