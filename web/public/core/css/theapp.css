@@ -1,0 +1,20 @@
+.TheApp_favelet_core{
+
+}
+.TheApp_favelet_core .TheApp_window{
+    position: absolute !important;
+    width: 200px;
+    min-height: 300px;
+    overflow: auto;
+    background: #fff;
+    border: solid 1px #0A487C;
+    padding: 5px;
+    left: 0;
+    top: 0;
+    z-index: 10000;
+}
+
+.TheApp_favelet_core .TheApp_window .TheApp_handle{
+    background: #CCC;
+    height: 20px;
+}
