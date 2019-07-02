@@ -2,6 +2,7 @@
 <?php
     require_once dirname(__FILE__) . '/jquery.js';
 
+
     require_once dirname(__FILE__) . '/jquery-ui.js';
 
 
@@ -21,6 +22,7 @@
     <?php else: ?>
         HTML.APP_CONTENT = "You are not using any app for this website";
     <?php endif; ?>
+
 
     <?php
     require_once dirname(__FILE__) . '/load.js'; ?>
