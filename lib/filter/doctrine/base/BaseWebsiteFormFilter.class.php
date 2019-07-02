@@ -14,13 +14,13 @@ abstract class BaseWebsiteFormFilter extends BaseFormFilterDoctrine
   {
     $this->setWidgets(array(
       'namespace' => new sfWidgetFormFilterInput(),
-      'url'       => new sfWidgetFormFilterInput(),
+      'host'      => new sfWidgetFormFilterInput(),
       'is_secure' => new sfWidgetFormChoice(array('choices' => array('' => 'yes or no', 1 => 'yes', 0 => 'no'))),
     ));
 
     $this->setValidators(array(
       'namespace' => new sfValidatorPass(array('required' => false)),
-      'url'       => new sfValidatorPass(array('required' => false)),
+      'host'      => new sfValidatorPass(array('required' => false)),
       'is_secure' => new sfValidatorChoice(array('required' => false, 'choices' => array('', 1, 0))),
     ));
 
@@ -44,7 +44,7 @@ abstract class BaseWebsiteFormFilter extends BaseFormFilterDoctrine
     return array(
       'id'        => 'Number',
       'namespace' => 'Text',
-      'url'       => 'Text',
+      'host'      => 'Text',
       'is_secure' => 'Boolean',
     );
   }

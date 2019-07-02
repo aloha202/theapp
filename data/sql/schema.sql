@@ -1,7 +1,7 @@
 CREATE TABLE default_image (id BIGINT AUTO_INCREMENT, name VARCHAR(255), title VARCHAR(255), image VARCHAR(255) NOT NULL, PRIMARY KEY(id)) ENGINE = INNODB;
 CREATE TABLE text_block_translation (id BIGINT, text TEXT, lang CHAR(2), PRIMARY KEY(id, lang)) ENGINE = INNODB;
 CREATE TABLE text_block (id BIGINT AUTO_INCREMENT, name VARCHAR(255) NOT NULL, title VARCHAR(255), application VARCHAR(32), module VARCHAR(32), special_mark VARCHAR(32), is_visible_for_admin TINYINT(1) DEFAULT '0', INDEX section_index_idx (application, module), PRIMARY KEY(id)) ENGINE = INNODB;
-CREATE TABLE website (id BIGINT AUTO_INCREMENT, namespace VARCHAR(255), url VARCHAR(255), is_secure TINYINT(1) DEFAULT '1', PRIMARY KEY(id)) ENGINE = INNODB;
+CREATE TABLE website (id BIGINT AUTO_INCREMENT, namespace VARCHAR(255), host VARCHAR(255), is_secure TINYINT(1) DEFAULT '1', PRIMARY KEY(id)) ENGINE = INNODB;
 CREATE TABLE website_project (id BIGINT AUTO_INCREMENT, website_id BIGINT NOT NULL, name VARCHAR(255), created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, INDEX website_id_idx (website_id), PRIMARY KEY(id)) ENGINE = INNODB;
 CREATE TABLE website_project2sf_guard_user (website_project_id BIGINT, sf_guard_user_id BIGINT, PRIMARY KEY(website_project_id, sf_guard_user_id)) ENGINE = INNODB;
 CREATE TABLE sf_guard_forgot_password (id BIGINT AUTO_INCREMENT, user_id BIGINT NOT NULL, unique_key VARCHAR(255), expires_at DATETIME NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, INDEX user_id_idx (user_id), PRIMARY KEY(id)) ENGINE = INNODB;
