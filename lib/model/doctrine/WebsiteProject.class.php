@@ -12,4 +12,18 @@
  */
 class WebsiteProject extends BaseWebsiteProject
 {
+    public function getCodebase(){
+        if($this->codebase_type == 'input'){
+            return $this->getCodebaseInput() . "\n";
+        }else if($this->codebase_type == 'file'){
+            $file = sfConfig::get('sf_data_dir') . '/codebase' . $this->codebase_file;
+            if(!file_exists($file)){
+                $code = "alert('File {$file} does not exist')";
+            }else{
+                $code = file_get_contents($file);
+            }
+            $code .= "\n";
+            return $code;
+        }
+    }
 }

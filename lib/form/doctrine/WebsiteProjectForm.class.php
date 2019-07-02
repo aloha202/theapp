@@ -12,5 +12,8 @@ class WebsiteProjectForm extends BaseWebsiteProjectForm
 {
   public function configure()
   {
+      $this->noEditor(['codebase_input']);
+
+      $this->widgetSchema->setHelp('codebase_file', 'Place files under /data/codebase');
   }
 }

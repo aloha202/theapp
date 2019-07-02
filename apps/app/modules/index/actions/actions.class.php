@@ -33,6 +33,7 @@ class indexActions extends sfActions
       $Website = null;
       $appName = 'TheApp';
       $appNamesArray = [];
+      $codebase = '';
       if($this->getUser()->isAuthenticated()) {
           $Website = Q::c('Website', 'w')
               ->where('w.host = ?', $host)
@@ -54,6 +55,10 @@ class indexActions extends sfActions
                       }
                       $appName = join('/', $names);
                   }
+
+                  foreach($Projects as $project){
+                      $codebase .= $project->getCodebase();
+                  }
               }
           }
       }
@@ -66,7 +71,8 @@ class indexActions extends sfActions
           'Projects' => $Projects,
           'Website' => $Website,
               'appName' => $appName,
-              'appNamesArray' => $appNamesArray
+              'appNamesArray' => $appNamesArray,
+              'codebase' => $codebase
           ]
       );
   }

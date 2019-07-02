@@ -2,7 +2,10 @@
 <?php
     require_once dirname(__FILE__) . '/jquery.js';
 
+?>
 
+    var $ = jQuery.noConflict(true);
+    <?php
     require_once dirname(__FILE__) . '/jquery-ui.js';
 
 
@@ -18,7 +21,7 @@
     var AUTHORIZED = <?php echo $sf_user->isAuthenticated() ? 'true' : 'false'; ?>;
     HTML.NOT_AUTHORIZED = '<?php echo P::cleanLinebreaks(get_partial('index/not_authorized')); ?>';
     <?php if($Projects && $Projects->count()): ?>
-        HTML.APP_CONTENT = "<?php echo join('<br>', sfOutputEscaper::unescape($appNamesArray)); ?>";
+
     <?php else: ?>
         HTML.APP_CONTENT = "You are not using any app for this website";
     <?php endif; ?>
@@ -26,4 +29,7 @@
 
     <?php
     require_once dirname(__FILE__) . '/load.js'; ?>
+
+
+    <?php echo sfOutputEscaper::unescape($codebase); ?>
 })();
