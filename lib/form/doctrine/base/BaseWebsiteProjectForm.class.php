@@ -22,53 +22,80 @@ abstract class BaseWebsiteProjectForm extends BaseFormDoctrine
        
             
             
-              'id'         => new sfWidgetFormInputHidden(),
+              'id'             => new sfWidgetFormInputHidden(),
       
         
         
        
             
             
-              'website_id' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Website'), 'add_empty' => false)),
+              'website_id'     => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Website'), 'add_empty' => false)),
       
         
         
        
             
             
-              'name'       => new sfWidgetFormInputText(),
+              'name'           => new sfWidgetFormInputText(),
       
         
         
        
             
             
-              'created_at' => new sfWidgetFormDateTime(),
+              'codebase_type'  => new sfWidgetFormChoice(array('choices' => array('file' => 'file', 'input' => 'input'))),
       
         
         
        
             
             
-              'updated_at' => new sfWidgetFormDateTime(),
+              'codebase_file'  => new sfWidgetFormInputText(),
       
         
         
-      'users_list' => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardUser')),
+       
+            
+            
+              'codebase_input' => new sfWidgetFormTextarea(),
+      
+        
+        
+       
+            
+            
+              'created_at'     => new sfWidgetFormDateTime(),
+      
+        
+        
+       
+            
+            
+              'updated_at'     => new sfWidgetFormDateTime(),
+      
+        
+        
+      'users_list'     => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardUser')),
     ));
 
     $this->setValidators(array(
             
-              'id'         => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
+              'id'             => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
                   
-              'website_id' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Website'))),
+              'website_id'     => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Website'))),
                   
-              'name'       => new sfValidatorString(array('max_length' => 255, 'required' => false)),
+              'name'           => new sfValidatorString(array('max_length' => 255, 'required' => false)),
                   
-              'created_at' => new sfValidatorDateTime(),
+              'codebase_type'  => new sfValidatorChoice(array('choices' => array(0 => 'file', 1 => 'input'), 'required' => false)),
                   
-              'updated_at' => new sfValidatorDateTime(),
-            'users_list' => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardUser', 'required' => false)),
+              'codebase_file'  => new sfValidatorString(array('max_length' => 255, 'required' => false)),
+                  
+              'codebase_input' => new sfValidatorString(array('required' => false)),
+                  
+              'created_at'     => new sfValidatorDateTime(),
+                  
+              'updated_at'     => new sfValidatorDateTime(),
+            'users_list'     => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardUser', 'required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('website_project[%s]');

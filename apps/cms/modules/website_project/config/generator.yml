@@ -21,13 +21,13 @@ generator:
       edit:    ~
       new:     ~
       
-#    extra:
+    extra:
 #      export:
 #        filename: '%date% - My export'
 #        mode: 'csv'      #[csv, xlsx]
 #        dateformat: 'Y.m.d'
 #        encoding: 'windows-1251'
-#      javascript:
+      javascript:
 #        ajax_form_validation: #22.10.2014
 #          fields: [name, email, directory]
 #        remoteoptions:
@@ -45,10 +45,9 @@ generator:
 #            toggler: selloff_enabled
 #            fields: [selloff_price, selloff_end_date]
 #           #reverse: true
-#        showhide_selects:
-#          type:
-#            toggler: type
-#            values:
-#              default: []
-#              articles: [articles]
-#              category: [category_discount, categories_list]
+        showhide_selects:
+          type:
+            toggler: codebase_type
+            values:
+              input: [codebase_input]
+              file: [codebase_file]

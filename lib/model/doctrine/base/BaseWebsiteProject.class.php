@@ -7,17 +7,26 @@
  * 
  * @property integer $website_id
  * @property string $name
+ * @property enum $codebase_type
+ * @property string $codebase_file
+ * @property string $codebase_input
  * @property Website $Website
  * @property Doctrine_Collection $Users
  * @property Doctrine_Collection $WebsiteProject2sfGuardUser
  * 
  * @method integer             getWebsiteId()                  Returns the current record's "website_id" value
  * @method string              getName()                       Returns the current record's "name" value
+ * @method enum                getCodebaseType()               Returns the current record's "codebase_type" value
+ * @method string              getCodebaseFile()               Returns the current record's "codebase_file" value
+ * @method string              getCodebaseInput()              Returns the current record's "codebase_input" value
  * @method Website             getWebsite()                    Returns the current record's "Website" value
  * @method Doctrine_Collection getUsers()                      Returns the current record's "Users" collection
  * @method Doctrine_Collection getWebsiteProject2sfGuardUser() Returns the current record's "WebsiteProject2sfGuardUser" collection
  * @method WebsiteProject      setWebsiteId()                  Sets the current record's "website_id" value
  * @method WebsiteProject      setName()                       Sets the current record's "name" value
+ * @method WebsiteProject      setCodebaseType()               Sets the current record's "codebase_type" value
+ * @method WebsiteProject      setCodebaseFile()               Sets the current record's "codebase_file" value
+ * @method WebsiteProject      setCodebaseInput()              Sets the current record's "codebase_input" value
  * @method WebsiteProject      setWebsite()                    Sets the current record's "Website" value
  * @method WebsiteProject      setUsers()                      Sets the current record's "Users" collection
  * @method WebsiteProject      setWebsiteProject2sfGuardUser() Sets the current record's "WebsiteProject2sfGuardUser" collection
@@ -39,6 +48,23 @@ abstract class BaseWebsiteProject extends sfDoctrineRecord
         $this->hasColumn('name', 'string', 255, array(
              'type' => 'string',
              'length' => 255,
+             ));
+        $this->hasColumn('codebase_type', 'enum', null, array(
+             'type' => 'enum',
+             'values' => 
+             array(
+              0 => 'file',
+              1 => 'input',
+             ),
+             'default' => 'input',
+             ));
+        $this->hasColumn('codebase_file', 'string', 255, array(
+             'type' => 'string',
+             'length' => 255,
+             ));
+        $this->hasColumn('codebase_input', 'string', null, array(
+             'type' => 'string',
+             'length' => '',
              ));
     }
 

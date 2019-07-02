@@ -10,6 +10,9 @@ WebsiteProject:
   columns:
     website_id: {type: integer, notnull: true}
     name: string(255)
+    codebase_type: {type: enum, values: [file, input], default: input}
+    codebase_file: string(255)
+    codebase_input: string()
   relations:
     Website: {foreignAlias: Projects, onDelete: CASCADE}
     Users: {class: sfGuardUser, refClass: WebsiteProject2sfGuardUser, foreignAlias: Projects}
