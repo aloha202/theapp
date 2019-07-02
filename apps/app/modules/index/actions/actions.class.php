@@ -17,12 +17,59 @@ class indexActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
-    $this->forward('default', 'module');
+    return $this->renderText('1');
   }
 
 
   public function executeLoad(sfWebRequest $request){
       $this->getResponse()->setContentType('text/javascript');
-      return $this->renderPartial('index/load.js');
+
+      $href = $request->getParameter('href');
+      $parsed = parse_url($href);
+
+      $host  = $parsed['host'];
+
+      $Projects = null;
+      $Website = null;
+      $appName = 'TheApp';
+      $appNamesArray = [];
+      if($this->getUser()->isAuthenticated()) {
+          $Website = Q::c('Website', 'w')
+              ->where('w.host = ?', $host)
+              ->fetchOne();
+          if ($Website) {
+              $Projects = Q::c('WebsiteProject', 'p')
+                  ->where('p.website_id = ?', $Website->id)
+                  ->andWhere('p.Users.id = ?', $this->getUser()->getGuardUser()->getId())
+                ->execute();
+              if($Projects && $Projects->count()){
+                  if($Projects->count() == 1){
+                      $appName = $Projects->getFirst()->getName();
+                      $appNamesArray = [$appName];
+                  }else{
+                      $names = [];
+                      foreach($Projects as $project){
+                          $names[] = $project->getName();
+                          $appNamesArray[] = $project->getName();
+                      }
+                      $appName = join('/', $names);
+                  }
+              }
+          }
+      }
+
+
+
+      return $this->renderPartial('index/load.js', [
+          'href' => $href,
+          'host' => $host,
+          'Projects' => $Projects,
+          'Website' => $Website,
+              'appName' => $appName,
+              'appNamesArray' => $appNamesArray
+          ]
+      );
   }
+
+
 }

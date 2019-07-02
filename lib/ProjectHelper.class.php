@@ -875,4 +875,8 @@ class ProjectHelper {
         return $aryRange;
     }
 
+    public function cleanLinebreaks($text){
+        return str_replace(array("\n", "\r", "\t"), '', $text);
+    }
+
 }

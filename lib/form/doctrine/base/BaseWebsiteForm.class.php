@@ -36,7 +36,7 @@ abstract class BaseWebsiteForm extends BaseFormDoctrine
        
             
             
-              'url'       => new sfWidgetFormInputText(),
+              'host'      => new sfWidgetFormInputText(),
       
         
         
@@ -55,7 +55,7 @@ abstract class BaseWebsiteForm extends BaseFormDoctrine
                   
               'namespace' => new sfValidatorString(array('max_length' => 255, 'required' => false)),
                   
-              'url'       => new sfValidatorString(array('max_length' => 255, 'required' => false)),
+              'host'      => new sfValidatorString(array('max_length' => 255, 'required' => false)),
                   
               'is_secure' => new sfValidatorBoolean(array('required' => false)),
           ));
