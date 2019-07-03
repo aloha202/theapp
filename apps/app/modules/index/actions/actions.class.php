@@ -43,23 +43,6 @@ class indexActions extends sfActions
                   ->where('p.website_id = ?', $Website->id)
                   ->andWhere('p.Users.id = ?', $this->getUser()->getGuardUser()->getId())
                 ->execute();
-              if($Projects && $Projects->count()){
-                  if($Projects->count() == 1){
-                      $appName = $Projects->getFirst()->getName();
-                      $appNamesArray = [$appName];
-                  }else{
-                      $names = [];
-                      foreach($Projects as $project){
-                          $names[] = $project->getName();
-                          $appNamesArray[] = $project->getName();
-                      }
-                      $appName = join('/', $names);
-                  }
-
-                  foreach($Projects as $project){
-                      $codebase .= $project->getCodebase();
-                  }
-              }
           }
       }
 
@@ -69,10 +52,7 @@ class indexActions extends sfActions
           'href' => $href,
           'host' => $host,
           'Projects' => $Projects,
-          'Website' => $Website,
-              'appName' => $appName,
-              'appNamesArray' => $appNamesArray,
-              'codebase' => $codebase
+          'Website' => $Website
           ]
       );
   }

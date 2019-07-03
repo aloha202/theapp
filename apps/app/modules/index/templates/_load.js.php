@@ -14,26 +14,57 @@
 
 
 ?>
-    var HTML = {};
+
     var DATA = {};
     DATA.HREF = '<?php echo P::cleanLinebreaks($href); ?>';
     DATA.HOST = '<?php echo $host; ?>';
     DATA.APP_NAME = '<?php echo $appName; ?>';
     var REMOTE_HOST = '//the.app.me';
-    var CORE_CSS_JQUERY_UI = REMOTE_HOST + '/public/core/css/jquery-ui.css?rand=' + Math.random();
-    var CORE_CSS_THEAPP = REMOTE_HOST + '/public/core/css/theapp.css?rand=' + Math.random();
-    var AUTHORIZED = <?php echo $sf_user->isAuthenticated() ? 'true' : 'false'; ?>;
-    HTML.NOT_AUTHORIZED = '<?php echo P::cleanLinebreaks(get_partial('index/not_authorized')); ?>';
-    <?php if($Projects && $Projects->count()): ?>
+
+
+    var Apps = [];
+
+    <?php if($sf_user->isAuthenticated()): ?>
+
+        <?php if($Projects && $Projects->count()): ?>
+
+            <?php foreach($Projects as $i => $project): ?>
+                Apps.push({
+                    id: '<?php echo $i + 1; ?>',
+                    name: '<?php echo $project->getName(); ?>',
+                    run: function ($content) {
+
+                        <?php echo sfOutputEscaper::unescape($project->getCodebase()); ?>
+
+                    }
+                })
+
+            <?php endforeach; ?>
+
+        <?php else: ?>
+            Apps.push({
+                id: '1',
+                name: 'TheApp',
+                content: '<?php echo P::prepareForJs(get_partial('index/no_apps')); ?>',
+                run: function($content){
+
+                }
+            });
+        <?php endif; ?>
 
     <?php else: ?>
-        HTML.APP_CONTENT = "You are not using any app for this website";
+        Apps.push({
+            id: '1',
+            name: 'TheApp',
+            content: '<?php echo P::prepareForJs(get_partial('index/not_authorized')); ?>',
+            run: function($content){
+
+            }
+        });
     <?php endif; ?>
 
 
     <?php
     require_once dirname(__FILE__) . '/load.js'; ?>
 
-
-    <?php echo sfOutputEscaper::unescape($codebase); ?>
 })();
