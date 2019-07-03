@@ -7,6 +7,10 @@
     var $ = jQuery.noConflict(true);
     <?php
     require_once dirname(__FILE__) . '/jquery-ui.js';
+    ?>
+
+    <?php
+    require_once dirname(__FILE__) . '/core.js';
 
 
 ?>
