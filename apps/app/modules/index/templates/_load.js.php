@@ -1,6 +1,6 @@
 (function () {
 <?php
-    require_once dirname(__FILE__) . '/jquery.js';
+    require_once dirname(__FILE__) . '/jquery-2.2.4.js';
 
 ?>
 
