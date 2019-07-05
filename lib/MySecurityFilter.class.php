@@ -6,7 +6,7 @@
  * Date: 7/5/19
  * Time: 12:19
  */
-class MySecurityFilter extends sfGuardRememberMeFilter
+class MySecurityFilter extends sfGuardBasicSecurityFilter
 {
 
 }

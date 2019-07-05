@@ -6,8 +6,8 @@ cms:
   class: CmsFilter
 security:
   class: MySecurityFilter
-#  param:
-#    type: security
+  param:
+    type: security
 
 cache:     ~
 cms2:
