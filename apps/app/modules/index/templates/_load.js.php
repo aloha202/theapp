@@ -1,6 +1,7 @@
 (function () {
 <?php
     require_once dirname(__FILE__) . '/jquery-2.2.4.js';
+//    require_once dirname(__FILE__) . '/jquery.slim.js';
 
 ?>
 
