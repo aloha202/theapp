@@ -15,5 +15,8 @@ class WebsiteProjectForm extends BaseWebsiteProjectForm
       $this->noEditor(['codebase_input']);
 
       $this->widgetSchema->setHelp('codebase_file', 'Place files under /data/codebase');
+
+      $this->widgetSchema['website_id']->setOption('add_empty', 'All websites')
+        ->setOption('query', Q::c('Website', 'w')->orderBy('w.namespace ASC'));
   }
 }
