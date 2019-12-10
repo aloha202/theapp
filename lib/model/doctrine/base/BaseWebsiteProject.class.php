@@ -10,8 +10,11 @@
  * @property enum $codebase_type
  * @property string $codebase_file
  * @property string $codebase_input
+ * @property boolean $has_window
+ * @property boolean $is_free
  * @property Website $Website
  * @property Doctrine_Collection $Users
+ * @property Doctrine_Collection $WebappConfigs
  * @property Doctrine_Collection $WebsiteProject2sfGuardUser
  * 
  * @method integer             getWebsiteId()                  Returns the current record's "website_id" value
@@ -19,16 +22,22 @@
  * @method enum                getCodebaseType()               Returns the current record's "codebase_type" value
  * @method string              getCodebaseFile()               Returns the current record's "codebase_file" value
  * @method string              getCodebaseInput()              Returns the current record's "codebase_input" value
+ * @method boolean             getHasWindow()                  Returns the current record's "has_window" value
+ * @method boolean             getIsFree()                     Returns the current record's "is_free" value
  * @method Website             getWebsite()                    Returns the current record's "Website" value
  * @method Doctrine_Collection getUsers()                      Returns the current record's "Users" collection
+ * @method Doctrine_Collection getWebappConfigs()              Returns the current record's "WebappConfigs" collection
  * @method Doctrine_Collection getWebsiteProject2sfGuardUser() Returns the current record's "WebsiteProject2sfGuardUser" collection
  * @method WebsiteProject      setWebsiteId()                  Sets the current record's "website_id" value
  * @method WebsiteProject      setName()                       Sets the current record's "name" value
  * @method WebsiteProject      setCodebaseType()               Sets the current record's "codebase_type" value
  * @method WebsiteProject      setCodebaseFile()               Sets the current record's "codebase_file" value
  * @method WebsiteProject      setCodebaseInput()              Sets the current record's "codebase_input" value
+ * @method WebsiteProject      setHasWindow()                  Sets the current record's "has_window" value
+ * @method WebsiteProject      setIsFree()                     Sets the current record's "is_free" value
  * @method WebsiteProject      setWebsite()                    Sets the current record's "Website" value
  * @method WebsiteProject      setUsers()                      Sets the current record's "Users" collection
+ * @method WebsiteProject      setWebappConfigs()              Sets the current record's "WebappConfigs" collection
  * @method WebsiteProject      setWebsiteProject2sfGuardUser() Sets the current record's "WebsiteProject2sfGuardUser" collection
  * 
  * @package    cms
@@ -43,7 +52,6 @@ abstract class BaseWebsiteProject extends sfDoctrineRecord
         $this->setTableName('website_project');
         $this->hasColumn('website_id', 'integer', null, array(
              'type' => 'integer',
-             'notnull' => true,
              ));
         $this->hasColumn('name', 'string', 255, array(
              'type' => 'string',
@@ -66,6 +74,14 @@ abstract class BaseWebsiteProject extends sfDoctrineRecord
              'type' => 'string',
              'length' => '',
              ));
+        $this->hasColumn('has_window', 'boolean', null, array(
+             'type' => 'boolean',
+             'default' => true,
+             ));
+        $this->hasColumn('is_free', 'boolean', null, array(
+             'type' => 'boolean',
+             'default' => false,
+             ));
     }
 
     public function setUp()
@@ -80,6 +96,10 @@ abstract class BaseWebsiteProject extends sfDoctrineRecord
              'refClass' => 'WebsiteProject2sfGuardUser',
              'local' => 'website_project_id',
              'foreign' => 'sf_guard_user_id'));
+
+        $this->hasMany('WebappConfig as WebappConfigs', array(
+             'local' => 'id',
+             'foreign' => 'website_project_id'));
 
         $this->hasMany('WebsiteProject2sfGuardUser', array(
              'local' => 'id',

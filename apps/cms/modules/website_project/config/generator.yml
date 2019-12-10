@@ -15,7 +15,7 @@ generator:
       actions: ~
       fields:  ~
       list:
-        display: [Website, name, created_at]
+        display: [Website, name, created_at, is_free, has_window]
       filter:  ~
       form:    ~
       edit:    ~

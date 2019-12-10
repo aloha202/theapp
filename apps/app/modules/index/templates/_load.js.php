@@ -37,7 +37,8 @@
 
                         <?php echo sfOutputEscaper::unescape($project->getCodebase()); ?>
 
-                    }
+                    },
+                    hasWindow: <?php echo $project->has_window ? 'true' : 'false'; ?>
                 })
 
             <?php endforeach; ?>
@@ -49,7 +50,8 @@
                 content: '<?php echo P::prepareForJs(get_partial('index/no_apps')); ?>',
                 run: function($content){
 
-                }
+                },
+                hasWindow: true
             });
         <?php endif; ?>
 

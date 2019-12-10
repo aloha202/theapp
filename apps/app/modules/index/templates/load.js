@@ -5,13 +5,15 @@
  $('body').append("<div class='TheApp_favelet_core'></div>");
  for(var i = 0; i < Apps.length; i++) {
      var App = Apps[i];
-     $('.TheApp_favelet_core').append(("<div class='TheApp_window TheApp_window-%id%' data-id='%id%'><div class='TheApp_handle'  data-id='%id%'>%appName%<div class='TheApp_minimize'  data-id='%id%'>_</div></div><div class='TheApp_content' data-id='%id%'>%appContent%</div></div>")
-         .replace('%appName%', App.name)
-         .replace('%appContent%', App.content || '')
-         .replace(/%id%/g, App.id));
-     $('.TheApp_favelet_core').append(("<div class='TheApp_token TheApp_token-%id%' data-id='%id%'><div><span>%appName%</span></div></div>")
-         .replace('%appName%', App.name)
-         .replace(/%id%/g, App.id));
+     if(App.hasWindow) {
+         $('.TheApp_favelet_core').append(("<div class='TheApp_window TheApp_window-%id%' data-id='%id%'><div class='TheApp_handle'  data-id='%id%'>%appName%<div class='TheApp_minimize'  data-id='%id%'>_</div></div><div class='TheApp_content' data-id='%id%'>%appContent%</div></div>")
+             .replace('%appName%', App.name)
+             .replace('%appContent%', App.content || '')
+             .replace(/%id%/g, App.id));
+         $('.TheApp_favelet_core').append(("<div class='TheApp_token TheApp_token-%id%' data-id='%id%'><div><span>%appName%</span></div></div>")
+             .replace('%appName%', App.name)
+             .replace(/%id%/g, App.id));
+     }
  }
 // styles
 
@@ -88,14 +90,17 @@
 
  for(var i = 0; i < Apps.length; i++) {
      var App = Apps[i];
-     var tokenLeft = -($(".TheApp_token-" + App.id).width() - $(".TheApp_token-" + App.id + " span").width() - 10);
-     $(".TheApp_token-" + App.id).css('left', tokenLeft);
-     $(".TheApp_token-" + App.id).data('left', tokenLeft);
+     var $content = null;
+     if(App.hasWindow) {
+         var tokenLeft = -($(".TheApp_token-" + App.id).width() - $(".TheApp_token-" + App.id + " span").width() - 10);
+         $(".TheApp_token-" + App.id).css('left', tokenLeft);
+         $(".TheApp_token-" + App.id).data('left', tokenLeft);
 
-     var delta = $(".TheApp_token-" + App.id).height() + 10;
-     $(".TheApp_token-" + App.id).css('top', 100 + delta*i);
+         var delta = $(".TheApp_token-" + App.id).height() + 10;
+         $(".TheApp_token-" + App.id).css('top', 100 + delta * i);
 
-     var $content = $('.TheApp_window-' + App.id + ' .TheApp_content');
+         $content = $('.TheApp_window-' + App.id + ' .TheApp_content');
+     }
 
      if(App.run){
          App.run($content);

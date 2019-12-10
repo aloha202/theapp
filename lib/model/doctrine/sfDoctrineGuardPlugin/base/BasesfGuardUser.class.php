@@ -25,6 +25,8 @@ Doctrine_Manager::getInstance()->bindComponent('sfGuardUser', 'doctrine');
  * @property sfGuardRememberKey $RememberKeys
  * @property sfGuardForgotPassword $ForgotPassword
  * @property Doctrine_Collection $Projects
+ * @property UserSettings $UserSettings
+ * @property Doctrine_Collection $WebappConfigs
  * @property Doctrine_Collection $WebsiteProject2sfGuardUser
  * 
  * @method string                getFirstName()                  Returns the current record's "first_name" value
@@ -45,6 +47,8 @@ Doctrine_Manager::getInstance()->bindComponent('sfGuardUser', 'doctrine');
  * @method sfGuardRememberKey    getRememberKeys()               Returns the current record's "RememberKeys" value
  * @method sfGuardForgotPassword getForgotPassword()             Returns the current record's "ForgotPassword" value
  * @method Doctrine_Collection   getProjects()                   Returns the current record's "Projects" collection
+ * @method UserSettings          getUserSettings()               Returns the current record's "UserSettings" value
+ * @method Doctrine_Collection   getWebappConfigs()              Returns the current record's "WebappConfigs" collection
  * @method Doctrine_Collection   getWebsiteProject2sfGuardUser() Returns the current record's "WebsiteProject2sfGuardUser" collection
  * @method sfGuardUser           setFirstName()                  Sets the current record's "first_name" value
  * @method sfGuardUser           setLastName()                   Sets the current record's "last_name" value
@@ -64,6 +68,8 @@ Doctrine_Manager::getInstance()->bindComponent('sfGuardUser', 'doctrine');
  * @method sfGuardUser           setRememberKeys()               Sets the current record's "RememberKeys" value
  * @method sfGuardUser           setForgotPassword()             Sets the current record's "ForgotPassword" value
  * @method sfGuardUser           setProjects()                   Sets the current record's "Projects" collection
+ * @method sfGuardUser           setUserSettings()               Sets the current record's "UserSettings" value
+ * @method sfGuardUser           setWebappConfigs()              Sets the current record's "WebappConfigs" collection
  * @method sfGuardUser           setWebsiteProject2sfGuardUser() Sets the current record's "WebsiteProject2sfGuardUser" collection
  * 
  * @package    cms
@@ -173,6 +179,14 @@ abstract class BasesfGuardUser extends sfDoctrineRecord
              'refClass' => 'WebsiteProject2sfGuardUser',
              'local' => 'sf_guard_user_id',
              'foreign' => 'website_project_id'));
+
+        $this->hasOne('UserSettings', array(
+             'local' => 'id',
+             'foreign' => 'user_id'));
+
+        $this->hasMany('WebappConfig as WebappConfigs', array(
+             'local' => 'id',
+             'foreign' => 'user_id'));
 
         $this->hasMany('WebsiteProject2sfGuardUser', array(
              'local' => 'id',

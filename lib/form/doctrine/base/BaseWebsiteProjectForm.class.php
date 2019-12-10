@@ -29,7 +29,7 @@ abstract class BaseWebsiteProjectForm extends BaseFormDoctrine
        
             
             
-              'website_id'     => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Website'), 'add_empty' => false)),
+              'website_id'     => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Website'), 'add_empty' => true)),
       
         
         
@@ -64,6 +64,20 @@ abstract class BaseWebsiteProjectForm extends BaseFormDoctrine
        
             
             
+              'has_window'     => new sfWidgetFormInputCheckbox(),
+      
+        
+        
+       
+            
+            
+              'is_free'        => new sfWidgetFormInputCheckbox(),
+      
+        
+        
+       
+            
+            
               'created_at'     => new sfWidgetFormDateTime(),
       
         
@@ -82,7 +96,7 @@ abstract class BaseWebsiteProjectForm extends BaseFormDoctrine
             
               'id'             => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
                   
-              'website_id'     => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Website'))),
+              'website_id'     => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Website'), 'required' => false)),
                   
               'name'           => new sfValidatorString(array('max_length' => 255, 'required' => false)),
                   
@@ -91,6 +105,10 @@ abstract class BaseWebsiteProjectForm extends BaseFormDoctrine
               'codebase_file'  => new sfValidatorString(array('max_length' => 255, 'required' => false)),
                   
               'codebase_input' => new sfValidatorString(array('required' => false)),
+                  
+              'has_window'     => new sfValidatorBoolean(array('required' => false)),
+                  
+              'is_free'        => new sfValidatorBoolean(array('required' => false)),
                   
               'created_at'     => new sfValidatorDateTime(),
                   
